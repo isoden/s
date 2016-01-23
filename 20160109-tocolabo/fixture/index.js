@@ -502,12 +502,21 @@ setTimeout(() => {
         this.x += this.dx;
         this.y += this.dy;
 
-        if (this.x <= this.radius || this.x >= ctx.canvas.width - this.radius) {
+        if (this.x <= this.radius) {
           this.dx *= -1;
+          console.log(this.radius);
+          this.x = this.radius;
+        } else if (this.x >= ctx.canvas.width - this.radius) {
+          this.dx *= -1;
+          this.x = ctx.canvas.width - this.radius;
         }
 
-        if (this.y <= this.radius || this.y >= ctx.canvas.height - this.radius) {
+        if (this.y <= this.radius) {
           this.dy *= -1;
+          this.y = this.radius;
+        } else if (this.y >= ctx.canvas.height - this.radius) {
+          this.dy *= -1;
+          this.y = ctx.canvas.height - this.radius;
         }
       }
     }
