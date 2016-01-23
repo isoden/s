@@ -1,0 +1,48 @@
+.profile .profile-round {
+  border-radius: 50%;
+}
+
+.profile .profile-summary {
+  margin: 0;
+}
+
+.profile .profile-summary p {
+  margin: 16px 0 0;
+}
+
+table {
+  font-size: 12px;
+  width: 100%;
+}
+
+table th {
+  background: #000;
+  color: #fff;
+}
+
+[layout] a.button {
+  padding: .5em;
+  background: rgba(0, 0, 0, .8);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .8);
+  color: #fff;
+  line-height: 1;
+  border-radius: 2px;
+}
+
+canvas {
+  background: #fff;
+}
+
+.blend-example {
+  margin: 20px 14px 0;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  width: 100px;
+  height: 120px;
+  white-space: nowrap;
+}
+
+.blend-example canvas {
+  display: block;
+}

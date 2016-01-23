@@ -1,0 +1,989 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>今日から始めるHTML5 Canvas</title>
+<link rel="stylesheet" href="./dist/talkie.min.css">
+<link rel="stylesheet" href="./dist/talkie-default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+<link rel="stylesheet" href="fixture/style.css">
+</head>
+<body>
+
+<template layout="cover" invert backface="fixture/image-backface.jpg" backface-filter="blur(1px) brightness(.5)" type="text/x-markdown">
+# 今日から始める HTML5 Canvas
+
+<p style="font-size: 1.4em; text-align: right;">
+と、コラボ特別編 Webクリエイター新年会 featuringまぼろし<br>
+2016年1月9日<br>
+<br>
+まぼろし 礒田優</p>
+</template>
+
+<template class="profile" layout="bullets" type="text/x-markdown">
+<img class="profile-round" src="fixture/image-profile.jpg" alt="">
+
+<ruby style="font-size: 1.125em">礒田<rt>いそだ</rt></ruby> <ruby style="font-size: 1.125em">優<rt>ゆう</rt></ruby><br>
+フロントエンドエンジニア
+
+<div class="profile-summary">
+
+**1993年**、**愛知県**生まれ。
+
+名古屋の専門学校でWebデザインを学び、<br>2014年3月に株式会社まぼろしに新卒で入社。
+
+好きなもの：**お酒**、辛いものなど
+
+<p style="text-align: center;"><a href="https://maboroshi.biz/staff/isoda.html">maboroshi.biz/staff/isoda.html</a></p>
+</div>
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### 概要
+
+- Canvasの基本
+- Canvasでアニメーション
+- パーティクルで覚えるCanvas
+- Canvasの学習方法
+</template>
+
+<template layout type="text/x-markdown">
+### 目的
+
+「Canvasを使ったことがない人に興味を持ってもらう」
+</template>
+
+<template layout="title" type="text/x-markdown">
+## Canvasの基本
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの基本
+
+JavaScriptを使ってグラフィックを動的に扱える要素
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの基本
+
+ブラウザにプラグインをインストールすることなく使える
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの基本
+
+2D Canvasの機能はほぼ全てのブラウザでサポート
+
+<a href="http://caniuse.com/#feat=canvas">![](fixture/image-ss10.png)</a>
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの基本
+
+WebGLを使うことで3D表現も可能
+</template>
+
+<template layout backface="fixture/image-ss11.png" backface-filter="blur(1px) brightness(.5)" type="text/x-markdown">
+<a href="http://www.littleworkshop.fr/renaultespace/" class="button">Renault Espace Visualization</a>
+</template>
+
+<template layout backface="fixture/image-ss09.png" type="text/x-markdown">
+<a href="https://kamra.invisi-dir.com/" class="button">KAMRA-Deja-Vu</a>
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの基本
+
+WebGLのサポート状況
+
+<a href="http://caniuse.com/#feat=canvas">![](fixture/image-ss03.png)</a>
+</template>
+
+<template layout type="text/x-markdown">
+## 2D Canvasでできること
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### 2D Canvasできること
+
+<blockquote>
+<div style="display: flex">
+<div style="margin: 0 40px">
+
+- 矩形の描画
+- 文字列の描画
+- 線のスタイル
+- 文字列のスタイル
+- 塗りと線のスタイル
+- グラデーションとパターン
+- 影のスタイル
+</div>
+<div style="margin: 0 40px">
+
+- パスの作成
+- パスを描画する
+- 図形の変形
+- 透明度と合成
+- 画像の描画
+- ピクセル操作
+- 画像の平滑化
+- キャンバスの状態
+</div>
+</div>
+
+<a href="https://developer.mozilla.org/ja/docs/Web/API/CanvasRenderingContext2D">CanvasRenderingContext2D - Web API インターフェイス | MDN</a>
+</blockquote>
+</template>
+
+<template backface="fixture/image-ss05.png" backface-filter="blur(1px) brightness(.6)" layout type="text/x-markdown">
+<a href="http://codepen.io/isoden/full/KVaeYY" class="button">2D Canvasでのパーティクル表現</a>
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### 小まとめ
+
+- ブラウザサポートはほぼ問題ない
+- プラグインなどに依存せず使うことができる
+- WebGLで3D表現もできる
+- ダイナミック、インタラクティブなコンテンツに用いられる
+</template>
+
+<template layout type="text/x-markdown">
+## Canvasでアニメーション
+</template>
+
+<template layout type="text/x-markdown">
+### アニメーションの方法
+
+Canvas自体にアニメーションの仕組みは定義されていない
+</template>
+
+<template layout type="text/x-markdown">
+### アニメーションの方法
+
+DOMアニメーションのように、動かしたいオブジェクトを<br>少しずつ移動させる (いわゆるコマ送り)
+
+<canvas id="ex-anim1" width="600" height="300"></canvas>
+<p>
+  <button id="ex-anim1-run">アニメーション１</button>
+  <button id="ex-anim1-run2">アニメーション２</button>
+  <button id="ex-anim1-run3">アニメーション３</button>
+</p>
+</template>
+
+<template layout type="text/x-markdown">
+### アニメーションの方法
+
+描画内容のクリア、オブジェクトの描画を繰り返し行う。
+
+<canvas id="ex-animation1" width="600" height="300"></canvas>
+<p>
+  <button id="ex-animation1-run2">クリアなし</button>
+  <button id="ex-animation1-run1">クリアあり</button>
+</p>
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### タイマーを用いる方法
+
+`setInterval` や `setTimeout` などのタイマーAPI
+
+```javascript
+var pos = {x : 0, y : 0};
+
+// 60fps(16.666666667ミリ秒ごと)の間隔で繰り返す
+setInterval(function animate() {
+  renderingCtx.clearRect(0, 0, canvaNode.width, canvasNode.height);
+
+  pos.x += 1;
+  renderingCtx.fillRect(pos.x, pos.y, 100, 100);
+}, 1000 / 60);
+```
+</template>
+
+<template layout="code" type="text/x-markdown">
+### パフォーマンスが優れている方法
+
+requestAnimationFrameを使う
+
+```javascript
+var pos = {x : 0, y : 0};
+
+function animate() {
+  renderingCtx.clearRect(0, 0, canvaNode.width, canvasNode.height);
+
+  pos.x += 1;
+  renderingCtx.fillRect(pos.x, pos.y, 100, 100);
+
+  // コールバックにanimate自身を指定して、ループで呼び出す
+  requestAnimationFrame(animate);
+}
+
+animate();
+```
+</template>
+
+<template layout type="text/x-markdown">
+### requestAnimationFrame
+
+ブラウザがフレームレートを決定する
+
+無理なく描画できるが、実行間隔は保証されていない
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### 小まとめ
+
+- Canvasのアニメーションはクリアして再描画の繰り返し
+- アニメーションには、タイマーAPIではなく、requestAnimationFrameを使う
+</template>
+
+<template layout type="text/x-markdown">
+### パーティクルで覚えるCanvas
+
+<a href="http://codepen.io/isoden/full/KVaeYY">2D Canvasでのパーティクル表現</a>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// canvas要素の取得
+var canvasNode = document.getElementById('canvas');
+
+// 描画コンテキストの取得
+var renderingCtx = canvasNode.getContext('2d');
+```
+
+<div><canvas width="600" height="300"></canvas></div>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// Canvas上の(40, 70)の座標に縦50px横50pxのサイズで描画する
+renderingCtx.fillRect(140, 70, 50, 50);
+```
+
+<div><canvas id="ex-rect1" width="600" height="300"></canvas></div>
+</template>
+
+
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// 塗り色の指定
+renderingCtx.fillStyle = 'orange';
+
+// Canvas上の(40, 70)の座標に縦50px横50pxのサイズで描画する
+renderingCtx.fillRect(140, 70, 50, 50);
+```
+
+<div><canvas id="ex-rect6" width="600" height="300"></canvas></div>
+</template>
+
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// パスの開始
+renderingCtx.beginPath();
+
+// パスの情報を作成
+renderingCtx.rect(140, 70, 50, 50);
+```
+
+<div><canvas id="ex-rect4" width="600" height="300"></canvas></div>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// パスの開始
+renderingCtx.beginPath();
+
+// パスの情報を作成
+renderingCtx.rect(140, 70, 50, 50);
+
+// パスを描画
+renderingCtx.fill();
+```
+
+<div><canvas id="ex-rect5" width="600" height="300"></canvas></div>
+</template>
+
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// Canvas上の(40, 70)の座標に縦50px横50pxのサイズで描画する
+renderingCtx.fillRect(140, 70, 50, 50);
+```
+
+<div><canvas id="ex-rect2" width="600" height="300"></canvas></div>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Canvasでの描画
+
+```javascript
+// Canvas上の(40, 70)の座標に縦50px横50pxのサイズで描画する
+renderingCtx.fillRect(140, 70, 50, 50);
+```
+
+<div><canvas id="ex-rect3" width="600" height="300"></canvas></div>
+</template>
+
+<template layout type="text/x-markdown">
+### パーティクルを作る流れ
+
+<pre style="text-align: center; font-size: 1em;"><p>パーティクル自身となるクラスを定義する
+↓
+表示させたいパーティクルの数だけインスタンスを作る
+↓
+ループでアニメーションを実行する
+↓
+ループの中で座標情報を更新する</p></pre>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+```javascript
+/**
+ * @class Circle
+ * @constructor
+ */
+function Circle(props) {
+  // 引数の初期値を設定
+  if (props === undefined) {
+    props = {};
+  }
+  // ...省略
+
+  this.x      = props.x;      // x座標
+  this.y      = props.y;      // y座標
+  this.dx     = props.dx;     // x座標の移動量
+  this.dy     = props.dy;     // y座標の移動量
+  this.radius = props.radius; // 半径
+  this.color  = props.color;  // 色
+  this.mode   = props.mode;   // 描画を塗りにするか線にするかの設定
+}
+```
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+```javascript
+/**
+ * @class Circle
+ * @constructor
+ */
+function Circle(props) {
+  // 引数の初期値を設定
+  if (props === undefined) {
+    props = {};
+  }
+  // ...省略
+
+  this.x      = 40;           // x座標
+  this.y      = 120;          // y座標
+  this.dx     = 3;            // x座標の移動量
+  this.dy     = -5;           // y座標の移動量
+  this.radius = 10;           // 半径
+  this.color  = 'orange';     // 色
+  this.mode   = 'fill';       // 描画を塗りにするか線にするかの設定
+}
+```
+</template>
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+```javascript
+Circle.prototype.render = function render(renderingCtx) {
+  renderingCtx.save();
+    renderingCtx.lineWidth = 2;
+
+    // 自身の座標情報を元に円のパスを作成
+    renderingCtx.beginPath();
+    renderingCtx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+
+    if (this.mode === 'fill') {
+      renderingCtx.fillStyle = this.color;
+      renderingCtx.fill();
+    } else if (this.mode === 'stroke') {
+      renderingCtx.strokeStyle = this.color;
+      renderingCtx.stroke();
+    }
+  renderingCtx.restore();
+};
+```
+</template>
+
+<template layout="code" type="text/x-markdown">
+### 円の描画
+
+<div>
+
+```javascript
+// 塗り色の設定
+renderingCtx.fillStyle = 'orange';
+
+// 円のパスを指定
+renderingCtx.beginPath();
+// x座標、y座標、半径、円の開始位置、円の終了位置
+renderingCtx.arc(220, 80, 20, 0, 360 * Math.PI / 180);
+
+// 塗りつぶし
+renderingCtx.fill();
+```
+
+<canvas id="ex-arc2" width="600" height="300"></canvas>
+</div>
+
+</template>
+
+
+
+<template layout="code" type="text/x-markdown">
+### 円の描画
+
+<div>
+
+```javascript
+// 線色の設定
+renderingCtx.strokeStyle = 'orange';
+
+// 円のパスを指定
+renderingCtx.beginPath();
+// x座標、y座標、半径、円の開始位置、円の終了位置
+renderingCtx.arc(220, 80, 20, 0, 360 * Math.PI / 180);
+
+// 線の描画
+renderingCtx.stroke();
+```
+
+<canvas id="ex-arc1" width="600" height="300"></canvas>
+</div>
+
+</template>
+
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+```javascript
+Circle.prototype.render = function render(renderingCtx) {
+  renderingCtx.save();
+    renderingCtx.lineWidth = 2;
+
+    // 自身の座標情報を元に円のパスを作成
+    renderingCtx.beginPath();
+    renderingCtx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+
+    if (this.mode === 'fill') {
+      renderingCtx.fillStyle = this.color;
+      renderingCtx.fill();
+    } else if (this.mode === 'stroke') {
+      renderingCtx.strokeStyle = this.color;
+      renderingCtx.stroke();
+    }
+  renderingCtx.restore();
+};
+```
+
+</template>
+
+<script layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+```javascript
+/**
+ * 座標を更新する
+ * @method update
+ */
+Circle.prototype.update = function update() {
+  // x座標とy座標に移動量を加算する
+  this.x += this.dx;
+  this.y += this.dy;
+
+  // x座標がcanvasの外に出たら移動量を反転して跳ね返りさせる
+  if (this.x <= 0 || this.x >= canvasNode.width) {
+    this.dx *= -1;
+  }
+
+  // y座標がcanvasの外に出たら移動量を反転して跳ね返りさせる
+  if (this.y <= 0 || this.y >= canvasNode.height) {
+    this.dy *= -1;
+  }
+};
+```
+</script>
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+<div>
+
+```javascript
+// x座標とy座標の移動量
+this.dy = 20;
+this.dy = 15;
+
+Circle.prototype.update = function update() {
+  // x座標とy座標に移動量を加算する
+  this.x += this.dx;
+  this.y += this.dy;
+  // ... 略
+};
+```
+
+<canvas id="ex-up1" width="600" height="300"></canvas>
+</div>
+</template>
+
+<script layout="code" type="text/x-markdown">
+### Circleクラスの定義
+
+<div>
+
+```javascript
+// x座標がcanvasの外に出たら移動量を反転して跳ね返り
+if (this.x <= 0 || this.x >= canvasNode.width) {
+  this.dx *= -1;
+}
+
+// y座標がcanvasの外に出たら移動量を反転して跳ね返り
+if (this.y <= 0 || this.y >= canvasNode.height) {
+  this.dy *= -1;
+}
+```
+
+<canvas id="ex-up2" width="600" height="300"></canvas>
+</div>
+
+</script>
+
+<template layout="code" type="text/x-markdown">
+### Circleクラスの定義
+```javascript
+// Circleクラスのインスタンスを生成
+var circle = new Circle({
+  x : 130, y : 50
+  // ... 略
+});
+
+function animate() {
+  renderingCtx.clearRect(0, 0, canvasNode.width, canvasNode.height);
+
+  // 更新して描画
+  circle.update();
+  circle.render(renderingCtx);
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+```
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### 全ての変数を定義
+
+```javascript
+var canvasNode   = document.getElementById('canvas');
+var renderingCtx = canvasNode.getContext('2d');
+
+// パーティクルの個数
+var circleLength = 1000;
+
+// インスタンスをまとめておく配列
+var circles      = [];
+
+// 描画の種類
+var renderModes  = ['stroke', 'fill'];
+
+// パーティクルの色
+var colors       = [
+  'hsla(0,   50%, 50%, .5)',
+  'hsla(45,  50%, 50%, .5)',
+  // ... 略
+];
+```
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### ユーティリティ関数を定義
+
+```javascript
+// 最小値と最大値の中からランダムな数値を返す
+function random(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
+// 配列の中からランダムな値を選ぶ
+function choose(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+random(0, 5);      // return 3
+choose([1, 2, 3]); // return 2
+```
+</template>
+
+<template layout="code" type="text/x-markdown">
+### 初期化処理を行う関数の定義
+
+```javascript
+function init() {
+  // canvas要素をwindowと同じ大きさに指定
+  canvasNode.width  = window.innerWidth;
+  canvasNode.height = window.innerHeight;
+
+  // 合成の種類を指定
+  renderingCtx.globalCompositeOperation = 'lighter';
+
+  // circleLengthの数だけパーティクルを作る
+  // ... 略
+}
+```
+
+</template>
+
+<template layout type="text/x-markdown">
+### 合成とは
+
+Photoshopの描画モードのように、<br>重なりの表示方法が設定できる
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### 合成の種類 blend-mode
+
+<div style="margin-top: 6px; margin-left: 0;margin-right: 0;">
+
+[blend-modeの値が16種類、composite-modeの値が12種類使える。](https://drafts.fxtf.org/compositing-1/#canvascompositingandblending)
+
+<div class="blend-example"><canvas id="ex-blend1" width="100" height="100"></canvas>
+normal</div>
+<div class="blend-example"><canvas id="ex-blend2" width="100" height="100"></canvas>
+multiply</div>
+<div class="blend-example"><canvas id="ex-blend3" width="100" height="100"></canvas>
+screen</div>
+<div class="blend-example"><canvas id="ex-blend4" width="100" height="100"></canvas>
+overlay</div>
+<div class="blend-example"><canvas id="ex-blend5" width="100" height="100"></canvas>
+darken</div>
+<div class="blend-example"><canvas id="ex-blend6" width="100" height="100"></canvas>
+lighten</div>
+<div class="blend-example"><canvas id="ex-blend7" width="100" height="100"></canvas>
+color-dodge</div>
+<div class="blend-example"><canvas id="ex-blend8" width="100" height="100"></canvas>
+color-burn</div>
+<div class="blend-example"><canvas id="ex-blend9" width="100" height="100"></canvas>
+hard-light</div>
+<div class="blend-example"><canvas id="ex-blend10" width="100" height="100"></canvas>
+soft-light</div>
+<div class="blend-example"><canvas id="ex-blend11" width="100" height="100"></canvas>
+difference</div>
+<div class="blend-example"><canvas id="ex-blend12" width="100" height="100"></canvas>
+exclusion</div>
+<div class="blend-example"><canvas id="ex-blend13" width="100" height="100"></canvas>
+hue</div>
+<div class="blend-example"><canvas id="ex-blend14" width="100" height="100"></canvas>
+saturation</div>
+<div class="blend-example"><canvas id="ex-blend15" width="100" height="100"></canvas>
+color</div>
+<div class="blend-example"><canvas id="ex-blend16" width="100" height="100"></canvas>
+luminosity</div>
+</div>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### 合成の種類 composite-mode
+
+<div style="margin-top: 6px; margin-left: 0;margin-right: 0;">
+<div class="blend-example"><canvas id="ex-blend17" width="100" height="100"></canvas>
+clear</div>
+<div class="blend-example"><canvas id="ex-blend18" width="100" height="100"></canvas>
+copy</div>
+<div class="blend-example"><canvas id="ex-blend19" width="100" height="100"></canvas>
+source-over</div>
+<div class="blend-example"><canvas id="ex-blend20" width="100" height="100"></canvas>
+destination-over</div>
+<div class="blend-example"><canvas id="ex-blend21" width="100" height="100"></canvas>
+source-in</div>
+<div class="blend-example"><canvas id="ex-blend22" width="100" height="100"></canvas>
+destination-in</div>
+<div class="blend-example"><canvas id="ex-blend23" width="100" height="100"></canvas>
+source-out</div>
+<div class="blend-example"><canvas id="ex-blend24" width="100" height="100"></canvas>
+destination-out</div>
+<div class="blend-example"><canvas id="ex-blend25" width="100" height="100"></canvas>
+source-atop</div>
+<div class="blend-example"><canvas id="ex-blend26" width="100" height="100"></canvas>
+destination-atop</div>
+<div class="blend-example"><canvas id="ex-blend27" width="100" height="100"></canvas>
+xor</div>
+<div class="blend-example"><canvas id="ex-blend28" width="100" height="100"></canvas>
+lighter</div>
+
+</div>
+</template>
+
+<template layout type="text/x-markdown">
+### 合成のサポート状況
+
+<a href="http://caniuse.com/#feat=canvas-blending"><img src="fixture/image-ss13.png" alt=""></a>
+
+<blockquote>
+  <p><a href="http://caniuse.com/#feat=canvas-blending">Canvas blend modes - Can I Use...</a></p>
+</blockquote>
+</template>
+
+<script layout="code" type="text/x-markdown">
+### 初期化処理を行う関数の定義
+
+```javascript
+function init() {
+  // canvas要素をwindowと同じ大きさに指定
+  canvasNode.width  = window.innerWidth;
+  canvasNode.height = window.innerHeight;
+
+  // 合成の種類を変更
+  renderingCtx.globalCompositeOperation = 'lighter';
+
+  // circleLengthの数だけパーティクルを作る
+  for (var i = 0; i < circleLength; i += 1) {
+    circles.push(new Circle({
+      x         : random(0, canvasNode.width),
+      y         : random(0, canvasNode.height),
+      dx        : random(-5, 5),
+      dy        : random(-5, 5),
+      radius    : random(4, 12),
+      color     : choose(colors),
+      mode      : choose(renderModes)
+    }));
+  }
+}
+```
+
+</script>
+
+<template layout="code" type="text/x-markdown">
+### アニメーションを行うanimate関数の定義
+
+```javascript
+function animate() {
+  // 一度描画をクリアして、背景を黒で塗りつぶす
+  renderingCtx.clearRect(0, 0, canvasNode.width, canvasNode.height);
+
+  // 全てのパーティクルの更新と描画を実行
+  circles.forEach(function (circle) {
+    circle.update();
+    circle.render(renderingCtx);
+  });
+
+  // animate関数をループで実行する
+  requestAnimationFrame(animate);
+}
+```
+</template>
+
+<template layout="code" type="text/x-markdown">
+### あとは実行するだけ
+
+```javascript
+// 初期化を済ませてアニメーションを実行
+init();
+animate();
+```
+</template>
+
+<template layout type="text/x-markdown">
+### このくらいなら100行程で実装できる
+
+</template>
+
+<template layout type="text/x-markdown">
+### Canvasの学習方法
+
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### Canvas基礎の覚え方
+
+<div>
+<p><img src="fixture/image-book-cover01.jpg" style="width: 300px" alt=""></p>
+</div>
+
+</template>
+
+<template layout type="text/x-markdown">
+### 実践的なテクニック
+</template>
+
+<template layout type="text/x-markdown">
+### 実践的なテクニック
+
+<canvas id="ex-ph1" width="600" height="300"></canvas>
+<p><button id="ex-ph1-run">スタート</button></p>
+</template>
+
+
+
+<template layout backface type="text/x-markdown">
+### 基礎を覚えたら
+
+コードを書いてみる
+
+</template>
+
+<template layout backface type="text/x-markdown">
+### 基礎を覚えたら
+
+書いてみたその1
+
+
+<canvas id="rx-write1" width="600" height="300"></canvas>
+
+<a href="https://github.com/isoden/skewslider">github.com/isoden/skewslider</a>
+
+</template>
+
+<template layout backface type="text/x-markdown">
+### 基礎を覚えたら
+
+書いてみたその2
+
+<canvas id="rx-write2" width="600" height="300"></canvas>
+
+<!-- <a disabled href="https://github.com/isoden/circleripper">github.com/isoden/circleripper</a> -->
+
+</template>
+
+<template layout type="text/x-markdown">
+### 基礎を覚えたら
+
+実際に書いてみることで勘所がわかる
+
+</template>
+
+<template layout type="text/x-markdown">
+### 人のコードを見て覚える
+
+</template>
+
+<template layout backface="fixture/image-ss12.png" backface-filter="blur(1px) brightness(.5)" type="text/x-markdown">
+<a href="http://codepen.io/" class="button">CodePen</a>
+
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### 小まとめ
+
+- 基礎を覚えたら、コードを書いてみる
+- すごい人の書いたコードを見てみる
+
+</template>
+
+<template layout type="text/x-markdown">
+### 覚えておきたい機能 addHitRegion
+
+canvas要素にヒット領域を追加する
+
+</template>
+
+<template layout="code" type="text/x-markdown">
+### addHitRegionの使い方
+
+<canvas id="ex-hit1" width="600" height="300"></canvas>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### addHitRegionの使い方
+
+```javascript
+// 図形の描画
+renderingCtx.beginPath();
+renderingCtx.rect(40, 40, 40, 40);
+renderingCtx.fill();
+
+// ヒット領域を追加
+// regionのIDを指定する
+renderingCtx.addHitRegion({id: 'LightGreen'});
+```
+
+<canvas id="ex-hit2" width="600" height="300"></canvas>
+</template>
+
+<template layout="code" type="text/x-markdown">
+### addHitRegionの使い方
+
+```javascript
+// canvas要素自体のclickイベントを購読
+canvasNode.addEventListener('click', function (event) {
+  // eventオブジェクトにregionが渡される
+  if (event.region === 'LightGreen') {
+    alert('クリックされたよ！');
+  }
+});
+```
+
+<canvas id="ex-hit3" width="600" height="300"></canvas>
+</template>
+
+<template layout type="text/x-markdown">
+### ブラウザサポートはこれから
+
+<blockquote style="text-align: center;">
+<img src="fixture/image-ss06.png" style="width: 80%" alt="">
+
+<p style="margin: 20px 0 0;"><a href="https://developer.mozilla.org/ja/docs/Web/API/CanvasRenderingContext2D/addHitRegion#.E3.83.96.E3.83.A9.E3.82.A6.E3.82.B6.E3.83.BC.E5.AE.9F.E8.A3.85.E7.8A.B6.E6.B3.81">ブラウザー実装状況 CanvasRenderingContext2D.addHitRegion() - Web API インターフェイス | MDN</a></p>
+</blockquote>
+</template>
+
+<template layout type="text/x-markdown">
+### おわりに
+</template>
+
+<template layout="title" backface="fixture/image-backface2.jpg" backface-filter="blur(1px) brightness(.5)" type="text/x-markdown">
+## ありがとうございました<br><span style="font-size: .7em; line-height: 2.6"><b style="font-weight: bold;">Let's Enjoy Canvas</b> 🎨</span>
+</template>
+
+<template layout="bullets" type="text/x-markdown">
+### Thanks
+
+- https://www.flickr.com/photos/moriza/126238618
+- https://www.flickr.com/photos/quinndombrowski/5200218267/
+</template>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script src="./dist/talkie.js"></script>
+<script src="fixture/skewslider.js"></script>
+<script src="fixture/circleripper.js"></script>
+<script src="fixture/index.js"></script>
+<script>
+  var talkie = Talkie();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    talkie.changed.onValue((current) => {
+      console.clear();
+      // print presenter notes
+      console.info(talkie.notes[current.getAttribute('page')]);
+    });
+  });
+</script>
+</body>
+</html>

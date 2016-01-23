@@ -1,0 +1,28 @@
+/**
+ * Common display controls
+ */
+
+[layout] {
+  /* width & height are set automatically by the script execution */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+[layout][visible] {
+  opacity: 1;
+  z-index: 1;
+}
+
+[layout][backface] {
+  background-color: transparent;
+}
+
+[layout][scroll] pre {
+  overflow-y: scroll;
+}
